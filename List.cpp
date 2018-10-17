@@ -1,6 +1,35 @@
-#include "List.h"
 #include <iostream>
+#include <string>
 using namespace std;
+
+template <class Type>
+struct Node{
+    Type Val;
+    Node *Next, *Prev;
+};
+
+template <class Type>
+class List {
+    Node<Type> *Head, *Tail;
+    int count;
+public:
+    List();
+    List(const List&);
+    //~List();
+    int get_count();
+    void insert(int pos = 0);
+    void add_tail(Type n);
+    void add_head(Type n);
+
+    // List& operator=(const List&);
+    // List& operator+(const List&);
+
+    void show();
+    // void show(int pos);
+
+
+};
+
 
 template <class Type>
 List<Type>::List() : Head(NULL),Tail(NULL), count(0) {}
@@ -17,15 +46,15 @@ List<Type>::List(const List &L) : Head(NULL),Tail(NULL), count(0){
 template <class Type>
 void List<Type>::add_head(Type n) {
     Node<Type>* temp = new Node<Type>;
-    temp->Prev=0;
+    temp->Prev = 0;
     temp->Val = n;
     temp->Next = Head;
-    if (Head!=0)
+    if (Head != 0)
         Head->Prev = temp;
     if (count==0)
-        Head=Tail=temp;
+        Head = Tail = temp;
     else
-        Head=temp;
+        Head = temp;
     count++;
 }
 
@@ -75,7 +104,7 @@ void List<Type>::insert(int pos) {
     Node<Type>* PrevIns = Ins->Prev;
     Node<Type>* temp = new Node<Type>;
     cout << "Input new number: ";
-    cin >> temp->data;
+    cin >> temp->Val;
 
     if(PrevIns != 0 && count != 1)
         PrevIns->Next = temp;
